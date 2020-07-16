@@ -54,4 +54,10 @@ public class PlayerController : MonoBehaviour
     {
         body.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
     }
+
+    public void OnAttack()
+    {
+        Debug.Log("Attack");
+        animator.SetTrigger("Attack");
+    }
 }
