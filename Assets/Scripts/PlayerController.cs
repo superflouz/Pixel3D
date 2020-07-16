@@ -13,12 +13,14 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
     Rigidbody body;
     Animator animator;
+    Transform pivot;
 
     // Start is called before the first frame update
     void Awake()
     {
         body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        pivot = transform.Find("Pivot");
     }
 
     void FixedUpdate()
@@ -29,14 +31,12 @@ public class PlayerController : MonoBehaviour
         velocity2D = Vector2.MoveTowards(velocity2D, moveInput * speed, acceleration * Time.fixedDeltaTime);
         body.velocity = new Vector3(velocity2D.x, body.velocity.y, velocity2D.y);
 
-        /*
         // Rotation
         if (velocity2D.magnitude > 0)
         {
             float angle = Mathf.Atan2(velocity2D.x, velocity2D.y) * Mathf.Rad2Deg;
-            body.MoveRotation(Quaternion.RotateTowards(body.rotation, Quaternion.AngleAxis(angle, Vector3.up), rotationSpeed * Time.fixedDeltaTime));
+            pivot.rotation = (Quaternion.RotateTowards(pivot.rotation, Quaternion.AngleAxis(angle, Vector3.up), rotationSpeed * Time.fixedDeltaTime));
         }
-        */
     }
 
     public void OnMove(InputValue value)
